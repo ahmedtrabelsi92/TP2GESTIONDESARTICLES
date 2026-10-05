@@ -1,0 +1,12 @@
+https://localhost:44391/Category
+https://localhost:44391/Category/Create
+https://localhost:44391/Product
+https://localhost:44391/Product/Create
+
+
+Controllers>CategoryController.cs
+Controllers>HomeController.cs
+Controllers>ProductController.cs
+
+Models>Repositories>CategoryRepository.cs
+

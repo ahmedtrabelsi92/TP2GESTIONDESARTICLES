@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TP2.Models.Product>
+
+@{
+    ViewData["Title"] = "Liste des produits";
+}
+
+<h1 class="mb-4">Catalogue des Produits</h1>
+
+<div class="row mb-4 align-items-center">
+    <div class="col-md-8">
+        <form asp-controller="Product" asp-action="Search" method="get" class="d-flex gap-2">
+            <input type="search" name="val" value="@Context.Request.Query["val"]" class="form-control" placeholder="Rechercher un produit ou catégorie..." />
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-search"></i> Rechercher
+            </button>
+            @if (!string.IsNullOrEmpty(Context.Request.Query["val"]))
+            {
+                <a asp-action="Index" class="btn btn-outline-secondary">Réinitialiser</a>
+            }
+        </form>
+    </div>
+    <div class="col-md-4 text-end">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Ajouter un produit
+        </a>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info text-center" role="alert">
+        Aucun produit trouvé.
+    </div>
+}
+else
+{
+    <div class="card-group">
+        @foreach (var product in Model)
+        {
+            var photoPath = "~/images/" + (product.ImagePath ?? "noimage.jpg");
+            <div class="card m-3" style="min-width: 18rem; max-width: 30.5%;">
+                <div class="card-header">
+                    <h5><b>Nom: </b> @product.Name</h5>
+                    <h5><b>Prix: </b> @product.Price TND</h5>
+                    <h5><b>Quantité: </b> @product.QteStock</h5>
+                    <h5><b>Catégorie: </b> @(product.Category?.CategoryName ?? "Non spécifiée")</h5>
+                </div>
+
+                <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" alt="@product.Name" />
+
+                <div class="card-footer text-center">
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-primary m-1">View</a>
+                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-primary m-1">Edit</a>
+                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-danger m-1">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+}

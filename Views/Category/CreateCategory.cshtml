@@ -1,0 +1,27 @@
+@model TP2.Models.Category
+
+@{
+    ViewData["Title"] = "Créer une Catégorie";
+}
+
+<h1>Créer une nouvelle catégorie</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CategoryName" class="control-label">Nom de la catégorie</label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <input type="submit" value="Créer" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ms-2">Retour à la liste</a>
+            </div>
+        </form>
+    </div>
+</div>
