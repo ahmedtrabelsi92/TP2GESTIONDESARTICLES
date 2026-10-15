@@ -1,0 +1,55 @@
+﻿@model TP2.Models.Product
+
+@{
+    ViewData["Title"] = "Supprimer le Produit";
+}
+
+<h1>Supprimer le produit</h1>
+
+<h3 class="text-danger">Êtes-vous sûr de vouloir supprimer ce produit ?</h3>
+<div>
+    <h4>Détails du produit</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nom du produit
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Prix (TND)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            Quantité
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QteStock)
+        </dd>
+        <dt class="col-sm-2">
+            Catégorie
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Category?.CategoryName
+        </dd>
+        
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <dt class="col-sm-2">
+                Image
+            </dt>
+            <dd class="col-sm-10">
+                <img src="~/images/@Model.ImagePath" alt="Image du produit" class="img-thumbnail" style="max-height: 150px;" />
+            </dd>
+        }
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="submit" value="Supprimer" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary ms-2">Retour à la liste</a>
+    </form>
+</div>

@@ -11,15 +11,15 @@ using TP2.Models;
 namespace TP2GESTIONDESARTICLES.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261004110318_AddCategoryAndProduct")]
-    partial class AddCategoryAndProduct
+    [Migration("20261015091656_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.12")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);

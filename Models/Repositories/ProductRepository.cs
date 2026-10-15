@@ -42,6 +42,7 @@ namespace TP2.Models.Repositories
                 p1.Price = p.Price;
                 p1.QteStock = p.QteStock;
                 p1.CategoryId = p.CategoryId;
+                p1.ImagePath = p.ImagePath; // Mise à jour de l'image
                 context.SaveChanges();
             }
             return p1;

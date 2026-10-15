@@ -1,0 +1,70 @@
+﻿@model TP2.Models.Product
+
+@{
+    ViewData["Title"] = "Modifier le Produit";
+}
+
+<h1>Modifier le produit</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="ImagePath" />
+
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label">Nom du produit</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label">Prix (TND)</label>
+                <input asp-for="Price" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="QteStock" class="control-label">Quantité en stock</label>
+                <input asp-for="QteStock" class="form-control" type="number" />
+                <span asp-validation-for="QteStock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CategoryId" class="control-label">Catégorie</label>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId">
+                    <option value="">-- Sélectionner une catégorie --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <div class="form-group mb-3">
+                    <label class="control-label">Image actuelle</label>
+                    <div>
+                        <img src="~/images/@Model.ImagePath" alt="Image du produit" class="img-thumbnail" style="max-height: 150px;" />
+                    </div>
+                </div>
+            }
+
+            <div class="form-group mb-3">
+                <label class="control-label">Changer l'image (optionnel)</label>
+                <input type="file" name="file" class="form-control" accept="image/*" />
+            </div>
+
+            <div class="form-group mb-3">
+                <input type="submit" value="Enregistrer" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ms-2">Retour à la liste</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
